@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Icon } from 'react-native-elements';
 import { TabNavigator, StackNavigator, TabBarBottom } from 'react-navigation';

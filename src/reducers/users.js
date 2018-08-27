@@ -1,3 +1,4 @@
+// @flow
 import { ACTIONS } from '../actions/UserActions';
 
 const initialState = {
@@ -8,7 +9,7 @@ const initialState = {
   loading: true
 }
 
-export default (state = initialState, action) => {
+export default (state: Object = initialState, action: Object) => {
   switch(action.type) {
     case ACTIONS.GET_USER:
       return {

@@ -1,20 +1,32 @@
+// @flow
 import React, { Component } from 'react';
 import {
   KeyboardAvoidingView,
   View
 } from 'react-native';
 
-import { getUser, getUserByEmail } from '../../actions/UserActions';
+import { getUserByEmail } from '../../actions/UserActions';
 
 import { SearchBar } from 'react-native-elements';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { getUserSelector } from '../../selectors/userDataSelector';
 
-import { styles } from './Home.css';
+import { styles } from './Home.css.js';
 import User from '../../components/User';
 
-class Home extends Component {
+type Props = {
+  user: Object,
+  loading: boolean,
+  getUserByEmail: Function
+};
+
+type State = {
+  email: string,
+};
+
+class Home extends Component<Props, State> {
   static navigationOptions = {
     title: 'Home',
     headerTintColor: '#red',
@@ -67,8 +79,8 @@ class Home extends Component {
   }
 }
 
-const mapStateToProps = state => ({ user: state.users.user, loading: state.users.loading });
+const mapStateToProps = state => ({ user: getUserSelector(state), loading: state.users.loading });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getUser, getUserByEmail }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ getUserByEmail }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

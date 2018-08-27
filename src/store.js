@@ -1,10 +1,12 @@
+// @flow
 import {
   applyMiddleware,
   compose,
   createStore,
 } from 'redux';
+import { all } from 'redux-saga/effects';
 
-import userSagas from './sagas/users';
+import users from './sagas/users';
 import createSagaMiddleware from 'redux-saga';
 
 import { createLogger } from 'redux-logger';
@@ -20,6 +22,8 @@ const composedMiddleware = compose(applyMiddleware(...middleware));
 
 export default createStore(RootReducer, initialState, composedMiddleware);
 
-sagaMiddleware.run(userSagas.getUserByIdSaga);
-sagaMiddleware.run(userSagas.getUserByEmailSaga);
-sagaMiddleware.run(userSagas.getUsersSaga);
+sagaMiddleware.run(function * () {
+  yield all(([
+    users(),
+  ]))
+});

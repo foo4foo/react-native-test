@@ -1,4 +1,7 @@
-import { call, put, takeEvery} from 'redux-saga/effects';
+// @flow
+import { call, put, takeEvery, select } from 'redux-saga/effects';
+
+import * as selectors from '../selectors/userDataSelector';
 
 import { ACTIONS } from '../actions/UserActions';
 import { getUserData, searchByEmail, getUsersData } from '../api/Users';
@@ -18,8 +21,8 @@ function* getUserByIdSaga() {
 
 function* getUserByEmail(action) {
   try {
-		const userData = yield call(searchByEmail, action.payload);
-    yield put({ type: ACTIONS.GET_USER_BY_EMAIL_SUCCESS, data: userData });
+		const response = yield call(searchByEmail, action.payload);
+    yield put({ type: ACTIONS.GET_USER_BY_EMAIL_SUCCESS, data: response });
   } catch(e) {
     yield put({ type: ACTIONS.GET_USER_BY_EMAIL_FAILURE, message: e.message });
   }
@@ -42,4 +45,7 @@ function* getUsersSaga() {
   yield takeEvery(ACTIONS.GET_USERS, getUsers);
 }
 
-export default { getUsersSaga, getUserByIdSaga, getUserByEmailSaga };
+export default function * (): Generator<any, any, any> {
+  yield takeEvery(ACTIONS.GET_USERS, getUsers)
+  yield takeEvery(ACTIONS.GET_USER_BY_EMAIL, getUserByEmail)
+}

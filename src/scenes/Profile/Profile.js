@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,10 +8,20 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-import { styles } from './Profile.css';
+import { styles } from './Profile.css.js';
 import User from '../../components/User';
 
-class Profile extends React.Component {
+type Props = {
+  user: Object,
+  loading: boolean,
+  navigation: Object
+};
+
+type State = {
+  loading: boolean,
+};
+
+class Profile extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
@@ -41,15 +52,15 @@ class Profile extends React.Component {
       })
     }
 
-    this.subs = [
+    //this.subs = [
       //this.props.navigation.addListener('didFocus', () => { if (!this.props.navigation.state.params) { this.props.navigation.goBack(); } })
-    ]
+    //]
   }
 
   componentWillUnmount() {
-    this.subs.forEach((sub) => {
+    //this.subs.forEach((sub) => {
       //sub.remove();
-    });
+    //});
   }
 
   render() {

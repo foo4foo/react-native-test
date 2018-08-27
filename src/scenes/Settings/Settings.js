@@ -1,8 +1,13 @@
+// @flow
 import React from 'react';
 
 import { View, Text } from 'react-native';
 
-export default class Settings extends React.Component {
+type Props = {
+
+};
+
+export default class Settings extends React.Component<Props> {
   render() {
     return (
       <View>

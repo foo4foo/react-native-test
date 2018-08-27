@@ -1,3 +1,4 @@
+// @flow
 import axios from 'axios';
 
 export const getUsersData = async () => {
@@ -10,7 +11,7 @@ export const getUsersData = async () => {
   })
 };
 
-export const getUserData = async (userId) => {
+export const getUserData = async (userId: number) => {
   return await axios({
     url: `https://jsonplaceholder.typicode.com/users/${userId}`,
     method: 'GET',
@@ -20,7 +21,7 @@ export const getUserData = async (userId) => {
   });
 };
 
-export const searchByEmail = async (email) => {
+export const searchByEmail = async (email: string) => {
   return await axios({
     url: `https://jsonplaceholder.typicode.com/users?email=${email}`,
     method: 'GET',

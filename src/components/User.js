@@ -1,10 +1,15 @@
+// @flow
 import React from 'react';
 
 import { View, Text, Image } from 'react-native';
 
-import { styles } from './User.css';
+import { styles } from './User.css.js';
 
-export default class User extends React.Component {
+type Props = {
+  user: Object
+};
+
+export default class User extends React.Component<Props> {
   render() {
     const { user } = this.props;
 
