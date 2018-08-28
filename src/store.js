@@ -7,6 +7,7 @@ import {
 import { all } from 'redux-saga/effects';
 
 import users from './sagas/users';
+import builds from './sagas/builds';
 import createSagaMiddleware from 'redux-saga';
 
 import { createLogger } from 'redux-logger';
@@ -25,5 +26,6 @@ export default createStore(RootReducer, initialState, composedMiddleware);
 sagaMiddleware.run(function * () {
   yield all(([
     users(),
+    builds(),
   ]))
 });

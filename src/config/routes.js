@@ -6,6 +6,7 @@ import Home from '../scenes/Home/Home';
 import Settings from '../scenes/Settings/Settings';
 import Users from '../scenes/Users/Users';
 import Profile from '../scenes/Profile/Profile';
+import Builds from '../scenes/Builds/Builds';
 
 const Tabs = TabNavigator({
   Home: {
@@ -35,6 +36,16 @@ const Tabs = TabNavigator({
       showIcon: true,
       tabBarIcon: ({ tintColor }) => (
           <Icon type='material-community' name='face-profile' color={tintColor} />
+      ),
+    })
+  },
+  Builds: {
+    screen: Builds,
+    navigationOptions: ({ navigation }) => ({
+      header: null,
+      showIcon: true,
+      tabBarIcon: ({ tintColor }) => (
+          <Icon type='entypo' name='briefcase' color={tintColor} />
       ),
     })
   },

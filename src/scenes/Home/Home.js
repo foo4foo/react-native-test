@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import {
   KeyboardAvoidingView,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 
 import { getUserByEmail } from '../../actions/UserActions';
@@ -46,6 +47,18 @@ class Home extends Component<Props, State> {
     this.state = {
       email: ''
     }
+  }
+
+  async componentDidMount() {
+    this.props.fetchBuilds();
+    try {
+      const value = await AsyncStorage.getItem('@CircleCIApi:key');
+      if (!value) {
+        this.props.navigation.navigate('Settings')
+      }
+     } catch (error) {
+       console.log(error);
+     }
   }
 
   onTextChange(text) {
