@@ -13,9 +13,21 @@ import {
 
 import { getUsers } from '../../actions/UserActions';
 
-import { styles } from './Users.css';
+import { styles } from './Users.css.js';
 
-class Users extends React.Component {
+type Props = {
+  users: Array<Object>,
+  loading: boolean,
+  getUsers: Function,
+  navigation: Object
+};
+
+type State = {
+  email: string,
+};
+
+
+class Users extends React.Component<Props, State> {
 
   componentDidMount() {
     this.props.getUsers();
