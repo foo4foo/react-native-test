@@ -1,7 +1,11 @@
 // @flow
-type Props = 'loading' | 'message' | 'error' | 'items';
 
-export type BuildsStore = Map<Props, any>
+export type BuildsStore = {
+  list: Array<any>,
+  loading: boolean,
+  error: boolean,
+  message: any
+}
 
 export type Build = {
   branch: string,
@@ -31,14 +35,23 @@ export type Builds = Array<Build>
 export const BuildsActionType = {
   FETCH_BUILDS: 'FETCH_BUILDS',
   FETCH_BUILDS_SUCCESS: 'FETCH_BUILDS_SUCCESS',
-  FETCH_BUILDS_FAILURE: 'FETCH_BUILDS_FAILURE'
+  FETCH_BUILDS_FAILURE: 'FETCH_BUILDS_FAILURE',
+  FETCH_BUILDS_BY_BRANCH: 'FETCH_BUILDS_BY_BRANCH',
+  FETCH_BUILDS_BY_BRANCH_SUCCESS: 'FETCH_BUILDS_BY_BRANCH_SUCCESS',
+  FETCH_BUILDS_BY_BRANCH_FAILURE: 'FETCH_BUILDS_BY_BRANCH_FAILURE',
 }
 
 export type FETCH_BUILDS = { type: 'FETCH_BUILDS' }
 export type FETCH_BUILDS_SUCCESS = { type: 'FETCH_BUILDS_SUCCESS' }
 export type FETCH_BUILDS_FAILURE = { type: 'FETCH_BUILDS_FAILURE' }
+export type FETCH_BUILDS_BY_BRANCH = { type: 'FETCH_BUILDS_BY_BRANCH', payload: string }
+export type FETCH_BUILDS_BY_BRANCH_SUCCESS = { type: 'FETCH_BUILDS_BY_BRANCH_SUCCESS', payload: string }
+export type FETCH_BUILDS_BY_BRANCH_FAILURE = { type: 'FETCH_BUILDS_BY_BRANCH_FAILURE' }
 
 export type BuildsAction =
 | FETCH_BUILDS
 | FETCH_BUILDS_SUCCESS
 | FETCH_BUILDS_FAILURE
+| FETCH_BUILDS_BY_BRANCH
+| FETCH_BUILDS_BY_BRANCH_SUCCESS
+| FETCH_BUILDS_BY_BRANCH_FAILURE

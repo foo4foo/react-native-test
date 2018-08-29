@@ -3,15 +3,13 @@ import React from 'react';
 
 import {
   View,
-  Text
+  Text,
 } from 'react-native';
-
-import type { Build } from '../types/builds';
 
 import { styles } from './Build.css.js';
 
 type Props = {
-  build: Build
+  navigation: Object
 }
 
 export default class Build extends React.Component<Props> {

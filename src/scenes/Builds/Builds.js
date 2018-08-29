@@ -2,12 +2,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchBuilds } from '../../actions/buildsActions';
+import { fetchBuilds, fetchBuildsByBranch } from '../../actions/buildsActions';
 import {
   View,
   AsyncStorage,
   Text,
-  TouchableOpacity
+  Picker
 } from 'react-native';
 import type { Build } from '../../types/builds';
 import { getBuildsSelector } from '../../selectors/buildsDataSelector';
@@ -16,15 +16,24 @@ import { styles } from '../Builds/Builds.css.js';
 
 type Props = {
   fetchBuilds: Function,
+  fetchBuildsByBranch: Function,
   navigation: Object,
   builds: Array<Build>,
 }
 
 type State = {
-
+  branch: string
 }
 
 class Builds extends React.Component<Props, State> {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      branch: 'master'
+    }
+  }
+
   async componentDidMount() {
     // iz nekog razloga ne radi kako treba
     //const apiKey = await AsyncStorage.getItem('@CircleCIApi:key');
@@ -34,6 +43,11 @@ class Builds extends React.Component<Props, State> {
 
   redirectToBuild(build: Build, buildNo: number): void {
     this.props.navigation.navigate('Build', { build, buildNo});
+  }
+
+  handlePickerOption(value: string): void {
+    this.setState({branch: value});
+    this.props.fetchBuildsByBranch(value);
   }
 
   renderRow(build, buildsLength, i) {
@@ -58,11 +72,19 @@ class Builds extends React.Component<Props, State> {
   
   render() {
     const { builds } = this.props; 
+    const { branch } = this.state;
 
     return (
       <View style={styles.container}>
         <View style={styles.centered}>
           <Text style={styles.title}>Circle CI</Text>
+          <Picker
+            selectedValue={branch}
+            style={styles.selectMenu}
+            onValueChange={itemValue => this.handlePickerOption(itemValue)}>
+            <Picker.Item label="Master" value="master" />
+            <Picker.Item label="Development" value="development" />
+          </Picker>
         </View>
         <View style={styles.leftAligned}>
           <Text style={styles.description}>Latest Builds</Text>
@@ -81,6 +103,6 @@ class Builds extends React.Component<Props, State> {
 
 const mapStateToProps = state => ({ builds: getBuildsSelector(state) });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ fetchBuilds }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ fetchBuilds, fetchBuildsByBranch }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Builds)

@@ -21,7 +21,8 @@ type Props = {
   user: Object,
   loading: boolean,
   getUserByEmail: Function,
-  fetchBuilds: Function
+  fetchBuilds: Function,
+  navigation: Object
 };
 
 type State = {
@@ -56,7 +57,7 @@ class Home extends Component<Props, State> {
     }
   }
 
-  async apiKeyExists(): boolean {
+  async apiKeyExists(): Promise<boolean> {
     try {
       const value = await AsyncStorage.getItem('@CircleCIApi:key');
       if (!value) {

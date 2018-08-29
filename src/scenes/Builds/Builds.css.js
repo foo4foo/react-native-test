@@ -45,6 +45,12 @@ const styles = StyleSheet.create({
   },
   commitMessage: {
     textAlign: 'left'
+  },
+  selectMenu: {
+    height: 50, 
+    width: '100%',
+    borderColor: 'purple',
+    borderWidth: 1
   }
 });
 

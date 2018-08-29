@@ -15,8 +15,12 @@ type Props = {
 
 };
 
-export default class Settings extends React.Component<Props> {
-  constructor(props) {
+type State = {
+  text: string
+}
+
+export default class Settings extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -24,7 +28,7 @@ export default class Settings extends React.Component<Props> {
     }
   }
 
-  async saveApiKey(key) {
+  async saveApiKey(key: string) {
     try {
       await AsyncStorage.setItem('@CircleCIApi:key', key);
     } catch (error) {
