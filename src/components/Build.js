@@ -33,7 +33,7 @@ export default class Build extends React.Component<Props> {
           <Text>Status: {params.build.outcome}</Text>
           <Text>Commit message:</Text>
         </View>
-        <View>
+        <View style={styles.centered}>
           <Text>{params.build.subject}</Text>
         </View>
       </View>
