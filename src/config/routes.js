@@ -7,6 +7,7 @@ import Settings from '../scenes/Settings/Settings';
 import Users from '../scenes/Users/Users';
 import Profile from '../scenes/Profile/Profile';
 import Builds from '../scenes/Builds/Builds';
+import Build from '../components/Build';
 
 const Tabs = TabNavigator({
   Home: {
@@ -72,8 +73,12 @@ export const Root = StackNavigator(
   {
     Tabs: {
       screen: Tabs
-    }
-  }, {
+    },
+    Build: {
+      screen: Build
+    },
+  },
+  {
     mode: 'modal',
     headerMode: 'none'
   }

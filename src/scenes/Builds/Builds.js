@@ -6,9 +6,10 @@ import { fetchBuilds } from '../../actions/buildsActions';
 import {
   View,
   AsyncStorage,
-  Text
+  Text,
+  TouchableOpacity
 } from 'react-native';
-
+import type { Build } from '../../types/builds';
 import { getBuildsSelector } from '../../selectors/buildsDataSelector';
 
 import { styles } from '../Builds/Builds.css.js';
@@ -16,6 +17,7 @@ import { styles } from '../Builds/Builds.css.js';
 type Props = {
   fetchBuilds: Function,
   navigation: Object,
+  builds: Array<Build>,
 }
 
 type State = {
@@ -24,18 +26,23 @@ type State = {
 
 class Builds extends React.Component<Props, State> {
   async componentDidMount() {
+    // iz nekog razloga ne radi kako treba
     //const apiKey = await AsyncStorage.getItem('@CircleCIApi:key');
     //console.log(apiKey);
     this.props.fetchBuilds('2b72a20c0cf7be14a7eef21a8b3879a838453828');
   }
 
-  renderRow(build, i) {
-    console.log(build);
+  redirectToBuild(build: Build, buildNo: number): void {
+    this.props.navigation.navigate('Build', { build, buildNo});
+  }
+
+  renderRow(build, buildsLength, i) {
+
     return (
-      <View key={i} style={styles.row}>
+      <View key={i} style={styles.row} onTouchStart={() => this.redirectToBuild(build, buildsLength - i)}>
         <View style={styles.rowLine}>
           <View style={styles.branch}>
-            <Text>{`${build.branch} / ${build.reponame} #${i + 1}`} </Text>
+            <Text>{`${build.branch} / ${build.reponame} #${buildsLength - i}`} </Text>
           </View>
           <View style={styles.time}>
             <Text>| {build.stop_time}</Text>
@@ -63,7 +70,7 @@ class Builds extends React.Component<Props, State> {
         <View style={styles.centered}>
           {
             builds.map((b, i) => {
-              return this.renderRow(b, i)
+              return this.renderRow(b, builds.length, i)
             })
           }
         </View>

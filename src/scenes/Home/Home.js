@@ -20,7 +20,8 @@ import User from '../../components/User';
 type Props = {
   user: Object,
   loading: boolean,
-  getUserByEmail: Function
+  getUserByEmail: Function,
+  fetchBuilds: Function
 };
 
 type State = {
@@ -50,18 +51,25 @@ class Home extends Component<Props, State> {
   }
 
   async componentDidMount() {
-    this.props.fetchBuilds();
+    if (!(await this.apiKeyExists())) {
+      this.props.navigation.navigate('Settings');
+    }
+  }
+
+  async apiKeyExists(): boolean {
     try {
       const value = await AsyncStorage.getItem('@CircleCIApi:key');
       if (!value) {
-        this.props.navigation.navigate('Settings')
+        return false;
       }
      } catch (error) {
        console.log(error);
      }
+
+     return true;
   }
 
-  onTextChange(text) {
+  onTextChange(text) : void {
     this.setState({ email: text });
     this.props.getUserByEmail(text);
   }

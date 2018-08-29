@@ -1,5 +1,7 @@
 // @flow
 import { BuildsActionType as ACTIONS } from '../types/builds';
+import type { Action } from '../types/index';
+import type { BuildsStore } from '../types/builds';
 
 const initialState = {
   list: [],
@@ -8,7 +10,7 @@ const initialState = {
   loading: true
 }
 
-export default (state: Object = initialState, action: Object) => {
+export default (state: BuildsStore = initialState, action: Action) => {
   switch(action.type) {
     case ACTIONS.FETCH_BUILDS:
       return {
