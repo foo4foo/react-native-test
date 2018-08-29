@@ -6,6 +6,8 @@ import {
   Text,
 } from 'react-native';
 
+import { getStatusColor } from '../helpers/buildsHelper';
+
 import { styles } from './Build.css.js';
 
 type Props = {
@@ -28,7 +30,7 @@ export default class Build extends React.Component<Props> {
         <View style={styles.leftAligned}>
           <Text>Project Name: {params.build.reponame}</Text>
           <Text>Branch: {params.build.branch}</Text>
-          <Text>Status: {params.build.outcome}</Text>
+          <Text style={getStatusColor(params.build.outcome, styles)}>Status: {params.build.outcome}</Text>
           <Text>Commit message:</Text>
         </View>
         <View style={styles.centered}>

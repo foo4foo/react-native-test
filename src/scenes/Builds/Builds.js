@@ -7,10 +7,13 @@ import {
   View,
   AsyncStorage,
   Text,
-  Picker
+  Picker,
+  ActivityIndicator,
 } from 'react-native';
 import type { Build } from '../../types/builds';
 import { getBuildsSelector } from '../../selectors/buildsDataSelector';
+
+import { getStatusColor } from '../../helpers/buildsHelper';
 
 import { styles } from '../Builds/Builds.css.js';
 
@@ -26,7 +29,7 @@ type State = {
 }
 
 class Builds extends React.Component<Props, State> {
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -51,7 +54,6 @@ class Builds extends React.Component<Props, State> {
   }
 
   renderRow(build, buildsLength, i) {
-
     return (
       <View key={i} style={styles.row} onTouchStart={() => this.redirectToBuild(build, buildsLength - i)}>
         <View style={styles.rowLine}>
@@ -64,7 +66,7 @@ class Builds extends React.Component<Props, State> {
         </View>
         <View style={styles.rowLine}>
           <Text>{build.subject} </Text>
-          <Text>| status: {build.outcome}</Text>
+          <Text style={getStatusColor(build.outcome, styles)}>| status: {build.outcome}</Text>
         </View>
       </View>
     )
@@ -73,6 +75,14 @@ class Builds extends React.Component<Props, State> {
   render() {
     const { builds } = this.props; 
     const { branch } = this.state;
+
+    if (builds.length < 1) {
+      return (
+        <View style={[ styles.container, styles.centered]}>
+          <ActivityIndicator size="large" color="#0000ff" />
+        </View>
+      )
+    }
 
     return (
       <View style={styles.container}>

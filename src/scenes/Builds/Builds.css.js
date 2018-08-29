@@ -51,6 +51,18 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: 'purple',
     borderWidth: 1
+  },
+  statusFailed: {
+    color: 'red'
+  },
+  statusRunning: {
+    color: 'blue'
+  },
+  statusQueued: {
+    color: 'orange'
+  },
+  statusPassed: {
+    color: 'green'
   }
 });
 

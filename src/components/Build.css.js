@@ -45,6 +45,18 @@ const styles = StyleSheet.create({
   },
   commitMessage: {
     textAlign: 'left'
+  },
+  statusFailed: {
+    color: 'red'
+  },
+  statusRunning: {
+    color: 'blue'
+  },
+  statusQueued: {
+    color: 'orange'
+  },
+  statusPassed: {
+    color: 'green'
   }
 });
 
