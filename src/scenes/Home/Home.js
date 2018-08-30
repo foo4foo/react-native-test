@@ -5,6 +5,7 @@ import {
   View,
   AsyncStorage
 } from 'react-native';
+import firebase from 'react-native-firebase';
 
 import { translate } from '../../utils/language.utils';
 
@@ -51,6 +52,23 @@ class Home extends Component<Props, State> {
     this.state = {
       email: ''
     }
+  }
+
+  // znam da ne bih trebao koristiti willMount. ovo je samo zbog testiranja :D
+  componentWillMount() {
+    // firebase
+    //   .auth()
+    //   .createUserWithEmailAndPassword('disko.misic@gmail.com', 'gibanica')
+    //   .then(() => console.log('successfuly registered'))
+    //   .catch(error => console.error(error));
+    firebase
+      .auth()
+      .signInWithEmailAndPassword('disko.misic@gmail.com', 'gibanica')
+      .then((user) => console.log(user))
+      .catch(error => console.error(error));
+
+    // const { currentUser } = firebase.auth();
+    // console.log(currentUser);
   }
 
   async componentDidMount() {

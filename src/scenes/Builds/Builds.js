@@ -108,7 +108,7 @@ class Builds extends React.Component<Props, State> {
             <View style={styles.leftAligned}>
               <Text style={styles.description}>Latest Builds</Text>
             </View>
-            <View style={styles.centered}>
+            <View>
               {
                 builds.map((b, i) => {
                   return this.renderRow(b, builds.length, i)
