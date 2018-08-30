@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-
+import { translate } from '../../utils/language.utils';
 import { 
   View, 
   Text,
@@ -20,6 +20,19 @@ type State = {
 }
 
 export default class Settings extends React.Component<Props, State> {
+  static navigationOptions = {
+    title: translate('HEADER.settings'),
+    headerTintColor: '#red',
+    headerStyle: {
+      backgroundColor: '#ffffff',
+      borderBottomColor: '#2F95D6',
+      borderBottomWidth: 3,
+    },
+    headerTitleStyle: {
+      fontSize: 18,
+    },
+  };
+
   constructor(props: Props) {
     super(props);
 

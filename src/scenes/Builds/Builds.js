@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { translate } from '../../utils/language.utils';
 import { fetchBuilds, fetchBuildsByBranch } from '../../actions/buildsActions';
 import {
   View,
@@ -29,6 +30,19 @@ type State = {
 }
 
 class Builds extends React.Component<Props, State> {
+  static navigationOptions = {
+    title: translate('HEADER.builds'),
+    headerTintColor: '#red',
+    headerStyle: {
+      backgroundColor: '#ffffff',
+      borderBottomColor: '#2F95D6',
+      borderBottomWidth: 3,
+    },
+    headerTitleStyle: {
+      fontSize: 18,
+    },
+  };
+
   constructor(props: Props) {
     super(props);
 
@@ -73,16 +87,8 @@ class Builds extends React.Component<Props, State> {
   }
   
   render() {
-    const { builds } = this.props; 
+    const { builds } = this.props;
     const { branch } = this.state;
-
-    if (builds.length < 1) {
-      return (
-        <View style={[ styles.container, styles.centered]}>
-          <ActivityIndicator size="large" color="#0000ff" />
-        </View>
-      )
-    }
 
     return (
       <View style={styles.container}>
@@ -96,16 +102,25 @@ class Builds extends React.Component<Props, State> {
             <Picker.Item label="Development" value="development" />
           </Picker>
         </View>
-        <View style={styles.leftAligned}>
-          <Text style={styles.description}>Latest Builds</Text>
-        </View>
-        <View style={styles.centered}>
-          {
-            builds.map((b, i) => {
-              return this.renderRow(b, builds.length, i)
-            })
-          }
-        </View>
+        {
+          builds.length > 0
+          ? <View>
+            <View style={styles.leftAligned}>
+              <Text style={styles.description}>Latest Builds</Text>
+            </View>
+            <View style={styles.centered}>
+              {
+                builds.map((b, i) => {
+                  return this.renderRow(b, builds.length, i)
+                })
+              }
+            </View>
+          </View>
+          : <View style={[ styles.container, styles.centered]}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        }
+        
       </View>
     )
   }

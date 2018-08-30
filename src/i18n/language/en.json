@@ -1,0 +1,18 @@
+{
+  "HEADER": {
+    "home": "Home",
+    "users": "Users",
+    "profile": "Profile",
+    "builds": "Builds",
+    "settings": "Settings"
+  },
+  "users": {
+    "title": "Users"
+  },
+  "builds": {
+    "title": "Builds"
+  },
+  "build": {
+    "title": "Circle CI"
+  }
+}

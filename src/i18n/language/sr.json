@@ -1,0 +1,18 @@
+{
+  "HEADER": {
+    "home":"Pocetna",
+    "users": "Korisnici",
+    "profile": "Nalog",
+    "builds": "Buildovi",
+    "settings": "Podesavanja"
+  },
+  "users": {
+    "title": "Korisnici"
+  },
+  "builds": {
+    "title": "Buildovi"
+  },
+  "build": {
+    "title": "Krug CI"
+  }
+}

@@ -6,6 +6,8 @@ import {
   AsyncStorage
 } from 'react-native';
 
+import { translate } from '../../utils/language.utils';
+
 import { getUserByEmail } from '../../actions/UserActions';
 
 import { SearchBar } from 'react-native-elements';
@@ -31,7 +33,7 @@ type State = {
 
 class Home extends Component<Props, State> {
   static navigationOptions = {
-    title: 'Home',
+    title: translate('HEADER.home'),
     headerTintColor: '#red',
     headerStyle: {
       backgroundColor: '#ffffff',

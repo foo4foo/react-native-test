@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
+import { translate } from '../../utils/language.utils';
 import { ListItem } from 'react-native-elements';
 
 import {
@@ -28,6 +28,18 @@ type State = {
 
 
 class Users extends React.Component<Props, State> {
+  static navigationOptions = {
+    title: translate('HEADER.users'),
+    headerTintColor: '#red',
+    headerStyle: {
+      backgroundColor: '#ffffff',
+      borderBottomColor: '#2F95D6',
+      borderBottomWidth: 3,
+    },
+    headerTitleStyle: {
+      fontSize: 18,
+    },
+  };
 
   componentDidMount() {
     this.props.getUsers();
