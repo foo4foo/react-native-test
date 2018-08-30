@@ -2,64 +2,54 @@
 import { BuildsActionType as ACTIONS } from '../types/builds';
 import type { Action } from '../types/index';
 import type { BuildsStore } from '../types/builds';
+import { fromJS } from 'immutable';
 
-const initialState = {
+const initialState = fromJS({
   list: [],
   error: false,
   message: null,
   loading: true
-}
+});
 
 export default (state: BuildsStore = initialState, action: Action) => {
   switch(action.type) {
     case ACTIONS.FETCH_BUILDS:
-      return {
-        ...state,
-        error: false,
-        message: null,
-        loading: true,
-        list: []
-      }
+      return state;
+      // return state.merge({
+      //   error: false,
+      //   message: null,
+      //   loading: true,
+      //   list: []
+      // })
     case ACTIONS.FETCH_BUILDS_SUCCESS:
-      return {
-        ...state,
-        error: false,
-        message: null,
-        loading: false,
-        list: action.data.data
-      }
+      return state;
+      // state = state.set('list', action.data.data);
+      // state = state.set('loading', false);
+      // state = state.set('error', false);
+      // return state;
     case ACTIONS.FETCH_BUILDS_FAILURE:
-      return {
-        ...state,
-        error: true,
-        message: action.data,
-        loading: false,
-        list: []
-      }
-      case ACTIONS.FETCH_BUILDS_BY_BRANCH:
-      return {
-        ...state,
-        error: false,
-        message: null,
-        loading: true,
-        list: []
-      }
+      return state.set('error', true);
+    case ACTIONS.FETCH_BUILDS_BY_BRANCH:
+        return state.merge({
+          error: false,
+          message: null,
+          loading: true,
+          list: []
+        })
     case ACTIONS.FETCH_BUILDS_BY_BRANCH_SUCCESS:
-      return {
-        ...state,
-        error: false,
-        message: null,
-        loading: false,
-        list: action.data.data
-      }
+      state = state.set('list', action.data.data);
+      state = state.set('loading', false);
+      state = state.set('error', false);
+      return state;
+      // {
+      //   ...state,
+      //   error: false,
+      //   message: null,
+      //   loading: false,
+      //   list: action.data.data
+      // }
     case ACTIONS.FETCH_BUILDS_BY_BRANCH_FAILURE:
-      return {
-        ...state,
-        error: true,
-        message: action.data,
-        loading: false,
-        list: []
-      }
+      return state.set('error', true);
     default:
       return state;
   }

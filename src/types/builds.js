@@ -1,11 +1,16 @@
 // @flow
+import { Map } from 'immutable';
 
-export type BuildsStore = {
-  list: Array<any>,
-  loading: boolean,
-  error: boolean,
-  message: any
-}
+type Props = 'list' | 'loading' | 'error' | 'message';
+
+export type BuildsStore = Map<Props, any>;
+
+// export type BuildsStore = {
+//   list: Array<any>,
+//   loading: boolean,
+//   error: boolean,
+//   message: any
+// }
 
 export type Build = {
   branch: string,

@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import type { State } from '../types';
 import type { Builds, Build } from '../types/builds';
 
-const getBuilds = (state: State): Array<any> => state.builds.list;
+const getBuilds = (state): Array<any> => state.builds.list;
 
 export const getBuildsSelector: (state: State) => Builds = createSelector(
   getBuilds,
